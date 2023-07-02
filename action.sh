@@ -12,7 +12,8 @@ do
 done
 
 if [ -n "${REMOTE_BRANCH}" ]; then
-    print_info "Setting remote branch for github pages"
+    print_info "--remote-branch ${REMOTE_BRANCH}"
+else
     export REMOTE_BRANCH="gh-pages"
 fi
 
