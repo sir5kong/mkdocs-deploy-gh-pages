@@ -11,6 +11,11 @@ do
     apk add --no-cache "${package}"
 done
 
+if [ -n "${REMOTE_BRANCH}" ]; then
+    print_info "Setting remote branch for github pages"
+    export REMOTE_BRANCH="gh-pages"
+fi
+
 if [ -n "${REQUIREMENTS}" ] && [ -f "${GITHUB_WORKSPACE}/${REQUIREMENTS}" ]; then
     pip install -r "${GITHUB_WORKSPACE}/${REQUIREMENTS}"
 else
@@ -57,4 +62,4 @@ fi
 git remote rm origin
 git remote add origin "${remote_repo}"
 
-mkdocs gh-deploy --config-file "${CONFIG_FILE}" --force
+mkdocs gh-deploy --config-file "${CONFIG_FILE}" --remote-branch "${REMOTE_BRANCH}" --force
